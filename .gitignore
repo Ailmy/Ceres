@@ -23,8 +23,11 @@ _testmain.go
 *.test
 
 public
-themes
+
 resources
 
 assets/jsconfig.json
 .DS_Store
+.vscode
+.frontmatter
+frontmatter.json

@@ -1,26 +1,28 @@
 baseurl = "https://example.com/"
 languageCode = "en-us"
-theme = "hugo-theme-stack"
-title = "Example Site"
-copyright = "Example Person"
+theme = ["hugo-theme-stack","almeida-cv"]
+title = "Ceres"
+copyright = "Ailm"
 DefaultContentLanguage = "zh-cn"
 hasCJKLanguage = true
+enableRobotsTXT = true
+enableEmoji = true
 
 [languages.en]
 languageName = "English"
-title = "Example Site"
+title = "Ailmy"
 weight = 2
 
 [languages.en.params.sidebar]
-subtitle = "Example description"
+subtitle = "Code is shit, show me the talk."
 
 [languages.zh-cn]
 languageName = "中文"
-title = "演示站点"
+title = "Ailmy"
 weight = 1
 
 [languages.zh-cn.params.sidebar]
-subtitle = "演示说明"
+subtitle = "Code is shit, show me the talk."
 
 [services.disqus]
 shortname = "hugo-theme-stack"
@@ -38,7 +40,22 @@ page = "/:slug/"
 mainSections = [ "post" ]
 featuredImageField = "image"
 rssFullContent = true
-
+#almeida-cv
+enableMetaTags = true
+colorLight = "#fff"
+colorDark = "#666"
+colorPageBackground = "#ddd"
+colorPrimary = "#e3bfb8"
+colorSecondary = "#aaa"
+colorIconPrimary = "#fff"
+colorIconBackground = "#e3bfb8"
+colorRightColumnBackground = "#f5f5f5"
+colorRightColumnHeadingText = "#666"
+colorRightColumnBodyText = "#666"
+colorRightColumnIconPrimary = "#fff"
+colorRightColumnIconBackground = "#e3bfb8"
+pages = 1
+swapColumns = true
   [params.footer]
   since = 2_020
 
