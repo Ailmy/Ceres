@@ -1,26 +1,26 @@
 baseurl = "https://example.com/"
 languageCode = "en-us"
 theme = "hugo-theme-stack"
-title = "Example Site"
-copyright = "Example Person"
+title = "Ceres"
+copyright = "Ailm"
 DefaultContentLanguage = "zh-cn"
 hasCJKLanguage = true
 
 [languages.en]
 languageName = "English"
-title = "Example Site"
+title = "Ailmy"
 weight = 2
 
 [languages.en.params.sidebar]
-subtitle = "Example description"
+subtitle = "Code is shit, show me the talk."
 
 [languages.zh-cn]
 languageName = "中文"
-title = "演示站点"
+title = "Ailmy"
 weight = 1
 
 [languages.zh-cn.params.sidebar]
-subtitle = "演示说明"
+subtitle = "Code is shit, show me the talk."
 
 [services.disqus]
 shortname = "hugo-theme-stack"
