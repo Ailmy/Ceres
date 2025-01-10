@@ -30,4 +30,5 @@ assets/jsconfig.json
 .DS_Store
 .vscode
 .frontmatter
+.idea
 frontmatter.json
