@@ -1,3 +1,6 @@
 [submodule "themes/hugo-theme-stack"]
 	path = themes/hugo-theme-stack
 	url = git@github.com:Ailmy/hugo-theme-stack.git
+[submodule "themes/almeida-cv"]
+	path = themes/almeida-cv
+	url = git@github.com:Ailmy/almeida-cv.git
