@@ -31,4 +31,5 @@ assets/jsconfig.json
 .vscode
 .frontmatter
 .idea
+**/.idea
 frontmatter.json
