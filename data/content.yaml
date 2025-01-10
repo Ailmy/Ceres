@@ -14,35 +14,6 @@ BasicInfo:
 
 Profile: 2020年毕业参加工作，擅长Java开发，不仅在研发方面有着丰富的经验，还涉及过产品设计与运维，拥有完整项目生命周期的经验。
 Experience:
-  - Employer: 四川汉博德科技有限公司 - 全栈开发工程师
-    Place: 成都
-    Positions:
-      - Title: 建诚MES项目
-        Date: 2020年09月 - 2022年11月
-        Details:
-          - 工业园区MES管理系统的新功能开发，该项目为前后端分离后台管理项目。主要模块为园区生产工艺，库存，采购、合同，出入库管理等。
-          - 负责与IT部门沟通，新增功能开发，更改业务逻辑，项目第三方系统接口对接，bug修改提升系统性能。
-        Badges: ['Java8', 'SpringBoot', 'MyBatisPlus', 'SQLServer', 'Redis', 'RabbitMQ', 'Vue','ElementUI']
-      - Title: 国有资产管理平台
-        Date: 2022年04月 - 2022年11月
-        Details:
-          - 政府旧系统升级前后端分离项目，为研究所内部办公使用，用户在系统中发起审批并对数据做归档和分析，参与了全阶段的开发工作。
-          - 参与了需求分析，制定开发任务，数据库表设计和主要功能模块的前后端开发工作。
-          - 与工作流系统对接
-
-        Badges: ['Java8', 'SpringBoot', 'MyBatisPlus','达梦', 'Vue','ElementUI']
-
-  - Employer: 贵州中铭数字信息技术有限公司 - 全栈开发工程师
-    Place: 遵义
-    Positions:
-      - Title: 政府移动办公平台
-        Date: 2023年04月 - 2023年06月
-        Details:
-          - 政府内部使用工作流审批系统，主要为用车申请，休假申请，物质申请等，分为贵政通app嵌入式H5页面和后台管理系统，项目为公司自研封装Activiti7流程系统。
-          - 负责项目后端系统，后台web系统以及uniApp手机H5页面端系统，新需求功能方案设计与开发，系统重要功能bug修复以及接口性能优化
-          - 在已有工作流基础上实现抄送人的功能
-          - 实现数据权限功能，使得区县可以使用该平台并且数据隔离
-        Badges: ['Java8', 'SpringBoot', 'MyBatisPlus','Activiti7','Uniapp', '人大金仓', 'Vue', 'Avue']
   - Employer: 贵州千寻云科技有限公司 - Java开发工程师
     Place: 贵阳
     Positions:
@@ -77,6 +48,36 @@ Experience:
           - 前端视频通话页面适配移动端用以小程序跳转
         Badges: ['Java8', 'SpringBoot', 'MybatisPlus','MySQL']
 
+  - Employer: 贵州中铭数字信息技术有限公司 - 全栈开发工程师
+    Place: 遵义
+    Positions:
+      - Title: 政府移动办公平台
+        Date: 2023年04月 - 2023年06月
+        Details:
+          - 政府内部使用工作流审批系统，主要为用车申请，休假申请，物质申请等，分为贵政通app嵌入式H5页面和后台管理系统，项目为公司自研封装Activiti7流程系统。
+          - 负责项目后端系统，后台web系统以及uniApp手机H5页面端系统，新需求功能方案设计与开发，系统重要功能bug修复以及接口性能优化
+          - 在已有工作流基础上实现抄送人的功能
+          - 实现数据权限功能，使得区县可以使用该平台并且数据隔离
+        Badges: ['Java8', 'SpringBoot', 'MyBatisPlus','Activiti7','Uniapp', '人大金仓', 'Vue', 'Avue']
+
+  - Employer: 四川汉博德科技有限公司 - 全栈开发工程师
+    Place: 成都
+    Positions:
+      - Title: 建诚MES项目
+        Date: 2020年09月 - 2022年11月
+        Details:
+          - 工业园区MES管理系统的新功能开发，该项目为前后端分离后台管理项目。主要模块为园区生产工艺，库存，采购、合同，出入库管理等。
+          - 负责与IT部门沟通，新增功能开发，更改业务逻辑，项目第三方系统接口对接，bug修改提升系统性能。
+        Badges: ['Java8', 'SpringBoot', 'MyBatisPlus', 'SQLServer', 'Redis', 'RabbitMQ', 'Vue','ElementUI']
+      - Title: 国有资产管理平台
+        Date: 2022年04月 - 2022年11月
+        Details:
+          - 政府旧系统升级前后端分离项目，为研究所内部办公使用，用户在系统中发起审批并对数据做归档和分析，参与了全阶段的开发工作。
+          - 参与了需求分析，制定开发任务，数据库表设计和主要功能模块的前后端开发工作。
+          - 与工作流系统对接
+
+        Badges: ['Java8', 'SpringBoot', 'MyBatisPlus','达梦', 'Vue','ElementUI']
+        
 Education:
   - Course: 电子信息工程技术
     Place: 贵州工业职业技术学院
