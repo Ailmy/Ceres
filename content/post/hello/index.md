@@ -168,5 +168,5 @@ __字体加粗__
 * 即 Markdown 不支持换行
 ------------------------
 ## 参考资料
-[参考](https://markdown.com.cn/)
+[Markdown 教程](https://markdown.com.cn/)
 [Markdown 语法说明](http://www.appinn.com/markdown/)
