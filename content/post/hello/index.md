@@ -1,12 +1,17 @@
 ---
 title: "Markdown语法模板"
-description:
+description: Markdown语法大全
 date: 2025-01-10 10:39:55+0800
 image:
-math:
-license:
+math: false
+license: false
 hidden: false
 comments: true
+toc: true
+style:
+  color: red
+keywords:
+redingTime: true
 ---
 
 
