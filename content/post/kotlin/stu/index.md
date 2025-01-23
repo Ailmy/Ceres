@@ -7,7 +7,7 @@ math:
 license:
 hidden: false
 comments: true
-draft: true
+draft: false
 tags:
   - 笔记
 categories:

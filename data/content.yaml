@@ -1,7 +1,7 @@
 BasicInfo:
   FirstName: 杨
   LastName: 光鑫
-#  Photo: img/avatar.jpg
+#  Photo: assets/avatar.jpg
   Contacts:
     - Icon: fas fa-phone
       Info: 133 1235 1616
