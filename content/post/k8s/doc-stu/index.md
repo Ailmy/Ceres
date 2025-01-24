@@ -136,4 +136,160 @@ BGP
 
 ## K8s资源清单
 
+### 资源类别
+* 名称空间级别
+    * 工作负载型资源：Pod，ReplicaSet，Deployment
+    * 服务发现及负债均衡型资源: Service,Ingress...
+    * 配置与存储型资源: Volume,CSI
+    * 特殊类型的存储卷: ConfigMap,Secret
+* 集群级资源
+    * Namespace,Node,ClusterRole,ClusterRoleBinding
+* 元数据型资源
+    * HPA,PodTemplate,LimitRange
+
+### 资源清单结构
+![资源清单结构](assets/资源清单结构.png)
+
+* apiVersion: 资源类型的API版本
+* kind: 资源类型
+* metadata: 元数据
+    * name: 资源名称
+    * namespace: 资源所在的名称空间,默认为default
+    * labels: 资源标签
+* spec: 资源规格（期望）
+    * 
+* status: 资源状态（实际）（由K8s管理）
+
+`kubectl apiversions` 查看支持的API版本
+
+`kubectl explain [资源类型]` 查看资源清单结构
+> 还可以查询子对象，如`kubectl explain pod.spec.containers`
+
+创建一个pod
+`kubectl create -f demo.yaml`
+
+查看pod
+`kubectl get pods`
+
+删除一个pod
+`kubectl delete -f demo.yaml`
+
+容器排错
+
+查看pod详细信息
+`kubectl describe pod pod-demo-1`
+```shell
+Name:             pod-demo-1
+Namespace:        default
+Priority:         0
+Service Account:  default
+Node:             k8sn1/192.168.17.12
+Start Time:       Fri, 24 Jan 2025 10:53:07 +0800
+Labels:           app=myapp
+Annotations:      cni.projectcalico.org/containerID: 29e078e4c8430c6c13e3dd591c9c75ecbc41a3d1a8e80b0266d972ef4ede5bb2
+                  cni.projectcalico.org/podIP: 10.244.203.0/32
+                  cni.projectcalico.org/podIPs: 10.244.203.0/32
+Status:           Pending
+IP:               
+IPs:              <none>
+Containers:
+  myapp-1:
+    Container ID:   
+    Image:          wangyanglinux/myapp:v1.0
+    Image ID:       
+    Port:           <none>
+    Host Port:      <none>
+    State:          Waiting
+      Reason:       ContainerCreating
+    Ready:          False
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-fdbt2 (ro)
+  myapp-2:
+    Container ID:   
+    Image:          wangyanglinux/myapp:v2.0
+    Image ID:       
+    Port:           <none>
+    Host Port:      <none>
+    State:          Waiting
+      Reason:       ContainerCreating
+    Ready:          False
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-fdbt2 (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   False 
+  Initialized                 True 
+  Ready                       False 
+  ContainersReady             False 
+  PodScheduled                True 
+Volumes:
+  kube-api-access-fdbt2:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type     Reason     Age                    From               Message
+  ----     ------     ----                   ----               -------
+  Normal   Scheduled  5m28s                  default-scheduler  Successfully assigned default/pod-demo-1 to k8sn1
+  Normal   Pulling    5m27s                  kubelet            Pulling image "wangyanglinux/myapp:v1.0"
+  Normal   Pulled     4m22s                  kubelet            Successfully pulled image "wangyanglinux/myapp:v1.0" in 1m4.799s (1m4.799s including waiting)
+  Normal   Created    4m22s                  kubelet            Created container myapp-1
+  Normal   Started    4m22s                  kubelet            Started container myapp-1
+  Normal   Pulling    4m22s                  kubelet            Pulling image "wangyanglinux/myapp:v2.0"
+  Normal   Pulled     4m13s                  kubelet            Successfully pulled image "wangyanglinux/myapp:v2.0" in 8.825s (8.825s including waiting)
+  Normal   Created    3m25s (x4 over 4m13s)  kubelet            Created container myapp-2
+  Normal   Started    3m25s (x4 over 4m13s)  kubelet            Started container myapp-2
+  Normal   Pulled     2m29s (x4 over 4m10s)  kubelet            Container image "wangyanglinux/myapp:v2.0" already present on machine
+  Warning  BackOff    26s (x17 over 4m7s)    kubelet            Back-off restarting failed container myapp-2 in pod pod-demo-1_default(505b2c03-871d-44f0-ad21-018fff0f3a3b)
+```
+
+主要看Events: k8s调度的过程事件
+
+`kubectl logs pod-demo-1 -c myapp-1` 查看容器日志
+
+### Pod的生命周期
+![Pod的生命周期](assets/pod的生命周期.drawio.png)
+
+![Pod的生命周期](assets/pod的生命周期.png)
+
+#### initC
+init容器与普通的容器非常像，除了以下两点
+* init容器总是运行到成功完成为止
+* 每个init容器都必须在下一个init容器启动之前成功完成
+
+> 如果Pod的init容器失败，k8s会不断的重启该Pod，知道init容器成功为止，**然而如果Pod对应的restartPolicy为Never，它不会重新启动**
+
+##### 检测initC的阻塞性
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: initc-1
+  labels:
+    app: initc
+spec:
+  containers:
+    - name: myapp-container
+      image: wangyanglinux/tools:busbox
+      command: ['sh', '-c', 'echo The app is running! && sleep 3600']
+  initContainers:
+    - name: init-myservice
+      image: wangyanglinux/tools:busybox
+      command: ['sh', '-c', 'until nslookup myservice; do echo waiting for myservice; sleep 2; done;']
+      
+    - name: init-mydb
+      image: wangyanglinux/tools:busbox
+      command: ['sh', '-c', 'until nslookup mydb; do echo waiting for mydb; sleep 2; done;']
+```
+
 
