@@ -217,7 +217,6 @@ server {
 
 点击创建证书,将证书当作你申请下来的ssl证书反在服务器上,nginx配置好就行,**以后所有的站点都可以使用该证书,无需再进行配置**
 
-![img_17.png](assets/img_17.png)
 ```
 server { # 配置一个server
     #listen 80; # 这段没用
@@ -245,8 +244,6 @@ CF启用经过身份验证的源服务器拉取
 ![img_20.png](assets/img_20.png)
 
 后续CF请求源站时会带上由下面CA签发的证书,你只需在nginx启用强制验证客户端证书并配置CF提供的CA
-
-![img_19.png](assets/img_19.png)
 
 ```
 server { # 配置一个server
@@ -296,6 +293,36 @@ server { # 配置一个server
 - 托管质询: 由CF决定是否需要手动点击,一般情况下都是无需操作
 
 如果你有需求需要通过域名调用API则可以将api的路径跳过,否则过不了验证
+
+#### 避开80和443端口封锁(可选)
+
+理论未实践
+
+有些地区可能运营商封锁了80和443,这样你可能可以ping通,但不能访问页面
+
+解决方法就是通过`CF -> 源站`这里不使用80和443了,nginx监听其他端口
+```
+server { # 配置一个server
+    listen [::]:10443 ssl; # 监听IPv6的10443端口并且强制https
+    server_name g.ailm.site; # 定义该server的host,我这是所有3级域名都请求到家里的nginx,这里通过host区分网站目录和路由转发
+    root /var/www/html/g.ailm.site;  # 定义该server的站点目录,root是 root配置的路径+uri = 实际访问你服务器的文件的地址,若不对应可以使用alias
+    index index.html; # 访问根目录返回的默认文件
+    
+    ssl_verify_client on; # 客户端证书验证 on为强制验证客户端证书
+    ssl_client_certificate /etc/nginx/certs/cloudflare.pem; # 客户端证书的CA证书,只有通过该证书签发的证书才能通过验证,而私钥在CF手上,只有CF能访问
+    ssl_certificate /etc/nginx/ssl/ailm.site.pem; # 服务端https的证书,用于cf验证源站是否可信和加密通信,拒绝中间人伪造响应或监听请求
+    ssl_certificate_key /etc/nginx/ssl/ailm.site.key; # 服务端https的证书的私钥
+
+}
+```
+
+linux防火墙也要放开该端口
+![img.png](assets/img123.png)
+![img_1.png](assets/img132_1.png)
+![img_2.png](assets/img132_2.png)
+
+这样`CF -> 源站`就会通过设置的端口进行访问,`浏览器 -> CF` 依然是默认的端口不会变化
+
 
 #### 结尾
 最终nginx站点配置文件
