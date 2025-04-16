@@ -325,7 +325,9 @@ linux防火墙也要放开该端口
 
 
 #### 结尾
-最终nginx站点配置文件
+最终nginx站点配置文件示例
+
+##### 一个前后端分离的项目:
 
 ![img_2.png](assets/img16_2.png)
 
@@ -344,12 +346,30 @@ server { # 配置一个server
         proxy_pass http://127.0.0.1:9001/; /api路径反向代理到http://127.0.0.1:9001,
     }
 }
-
 ```
 
-> proxy_pass的host后面加/的话会将路径中的location段去掉,实际访问g.ailm.site/api/a 会反向代理到 http://127.0.0.1:9001/a
+> proxy_pass的host后面加/的话会将路径中的location段去掉,这里9001端口是我的后端服务
+> 
+> 访问g.ailm.site/api/a 会反向代理到 http://127.0.0.1:9001/a ,其他路径在root中寻找,找不到返回404
+> 
+> 你也可以通过uri区分路由共用主机名
+> 
+> ```
+> location /serviceA/ {
+> proxy_pass http://127.0.0.1:9001/; 
+> }
+> location /serviceB/ { 
+> proxy_pass http://127.0.0.1:9002/; 
+> }
+>> ```
+> 访问g.ailm.site/serviceA/a相当于访问http://127.0.0.1:9001/a
+> 
+> 访问g.ailm.site/serviceB/a相当于访问http://127.0.0.1:9002/a
+
+##### 通过nginx暴露服务器的其他服务 ,已经存在的DDNSGO后台管理,我的NginxUI,其他的服务项目例如私有云盘nextcloud,存储聚合AList,影音服务Jellyfin...
+
 ![img_3.png](assets/img16_3.png)
-> 若你只想暴露内网的应用服务,比如nginxUI后台,DDNS-GO后台,或者你的ALis,Jellyfin等,或者应用api
+ 
 ```
 server {
     listen [::]:443 ssl;
@@ -363,10 +383,14 @@ server {
     }
 }
 ```
-> proxy_pass的host后面没有加/的话会包含location段,实际访问nginxui.ailm.site/a会反向代理到 http://127.0.0.1:9000/a
->  location /b 的话 访问nginxui.ailm.site/b/c 就会反向代理到http://127.0.0.1:9000/b/c
+> proxy_pass的host后面没有加/的话会包含location段,这里将所有请求都保持原来的路径代理到9000,9000是我的nginxUI服务
+> 
+> 访问nginxui.ailm.site/a会反向代理到 http://127.0.0.1:9000/a
+> 
+> 访问nginxui.ailm.site/a/c 就会反向代理到http://127.0.0.1:9000/a/c
 
-后续新增站点就用如下模板
+
+##### 后续新增站点就用如下模板
 ```
 server {
     listen [::]:443 ssl;
@@ -389,3 +413,5 @@ server {
 }
 ```
 保存之后重载nginx,然后就可以直接通过域名访问了
+
+##### 完结撒花
