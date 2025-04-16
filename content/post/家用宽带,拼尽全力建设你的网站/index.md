@@ -36,15 +36,19 @@ tags:
 ![](assets/img.png)
 
 由于开启了CF代理,https证书已经由CF自动托管,所以这点也无需任何配置,还可以隔绝机器人脚本
+
 ![img_1.png](assets/img_1.png)
 ![img.png](assets/img1.png)
 
 如果不开启代理,只解析DNS的话流量是直接到家的,会暴露源站ip,这可能会有黑客攻击的风险(虽然那点东西不值钱,但是万一被萌新黑客拿来练手把CentOS给你装成Ubuntu了呢),而且后续的安全方案也无法实现
+
 ![img_3.png](assets/img_3.png)
 ![img_4.png](assets/img_4.png)
+
 运营商也知道你的域名的话也能直接看到该域名指向了你的家宽ip,但运营商一般不知道你域名,这点问题不是很大
 
 ![img_2.png](assets/img_2.png)
+
 这里的地址是CF服务器节点的地址,源站ip为动态IPv6并且已经隐藏
 
 ### 卑鄙的运营商不讲武德
@@ -66,7 +70,7 @@ tags:
 - 脚本安装的[NginxUI](https://nginxui.com/zh_CN/)
 
 
-  准备的东西:
+准备的东西:
 - ~~首先你需要一条宽带~~
 - 一台能上网的设备,最好是linux系统或windows系统,手机愿意折腾到arm的linux也无所谓
 - cloudflare账号
