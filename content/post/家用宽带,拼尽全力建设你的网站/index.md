@@ -3,15 +3,15 @@ title: "家用宽带,拼尽全力建设你的网站"
 description: 白嫖才是最大的动力
 date: 2025-04-16 17:25:55+0800
 image:
-math: false
-license: true
+math:
+license:
 hidden: false
 comments: true
-toc: true
-style:
-  color: red
-keywords:
-redingTime: true
+draft: false
+categories:
+  - 建站
+tags:
+  - 公开教程
 ---
 
 ## 前期理论环节
