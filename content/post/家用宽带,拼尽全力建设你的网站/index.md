@@ -152,8 +152,8 @@ server {
     listen 80; #监听IPv4的80端口
     listen [::]:80; #监听IPv6的80端口
 
-    server_name g.ailm.site; # 定义该server的host,我这是所有3级域名都请求到家里的nginx,这里通过host区分网站目录和路由转发
-    root /var/www/html/g.ailm.site;  # 定义该server的站点目录,root是 root配置的路径+uri = 实际访问你服务器的文件的地址,若不对应可以使用alias
+    server_name hello.ailm.site; # 定义该server的host,我这是所有3级域名都请求到家里的nginx,这里通过host区分网站目录和路由转发
+    root /var/www/html/hello.ailm.site;  # 定义该server的站点目录,root是 root配置的路径+uri = 实际访问你服务器的文件的地址,若不对应可以使用alias
     index index.html; # 访问根目录返回的默认文件
 }
 ```
@@ -223,8 +223,8 @@ server { # 配置一个server
     #listen [::]:80; # 这段没用
     #listen 443 ssl; # 这段没用
     listen [::]:443 ssl; # 监听IPv6的443端口并且强制https
-    server_name g.ailm.site; # 定义该server的host,我这是所有3级域名都请求到家里的nginx,这里通过host区分网站目录和路由转发
-    root /var/www/html/g.ailm.site;  # 定义该server的站点目录,root是 root配置的路径+uri = 实际访问你服务器的文件的地址,若不对应可以使用alias
+    server_name hello.ailm.site; # 定义该server的host,我这是所有3级域名都请求到家里的nginx,这里通过host区分网站目录和路由转发
+    root /var/www/html/hello.ailm.site;  # 定义该server的站点目录,root是 root配置的路径+uri = 实际访问你服务器的文件的地址,若不对应可以使用alias
     index index.html; # 访问根目录返回的默认文件
 
     ssl_certificate /etc/nginx/ssl/ailm.site.pem; # 服务端https的证书,用于cf验证源站是否可信和加密通信,拒绝中间人伪造响应或监听请求
@@ -248,8 +248,8 @@ CF启用经过身份验证的源服务器拉取
 ```
 server { # 配置一个server
     listen [::]:443 ssl; # 监听IPv6的443端口并且强制https
-    server_name g.ailm.site; # 定义该server的host,我这是所有3级域名都请求到家里的nginx,这里通过host区分网站目录和路由转发
-    root /var/www/html/g.ailm.site;  # 定义该server的站点目录,root是 root配置的路径+uri = 实际访问你服务器的文件的地址,若不对应可以使用alias
+    server_name hello.ailm.site; # 定义该server的host,我这是所有3级域名都请求到家里的nginx,这里通过host区分网站目录和路由转发
+    root /var/www/html/hello.ailm.site;  # 定义该server的站点目录,root是 root配置的路径+uri = 实际访问你服务器的文件的地址,若不对应可以使用alias
     index index.html; # 访问根目录返回的默认文件
     
     ssl_verify_client on; # 客户端证书验证 on为强制验证客户端证书
@@ -304,8 +304,8 @@ server { # 配置一个server
 ```
 server { # 配置一个server
     listen [::]:10443 ssl; # 监听IPv6的10443端口并且强制https
-    server_name g.ailm.site; # 定义该server的host,我这是所有3级域名都请求到家里的nginx,这里通过host区分网站目录和路由转发
-    root /var/www/html/g.ailm.site;  # 定义该server的站点目录,root是 root配置的路径+uri = 实际访问你服务器的文件的地址,若不对应可以使用alias
+    server_name hello.ailm.site; # 定义该server的host,我这是所有3级域名都请求到家里的nginx,这里通过host区分网站目录和路由转发
+    root /var/www/html/hello.ailm.site;  # 定义该server的站点目录,root是 root配置的路径+uri = 实际访问你服务器的文件的地址,若不对应可以使用alias
     index index.html; # 访问根目录返回的默认文件
     
     ssl_verify_client on; # 客户端证书验证 on为强制验证客户端证书
@@ -335,8 +335,8 @@ linux防火墙也要放开该端口
 server { # 配置一个server
     listen 443 ssl; # 这段没用
     listen [::]:443 ssl; # 监听IPv6的443端口并且强制https
-    server_name g.ailm.site; # 定义该server的host,我这是所有3级域名都请求到家里的nginx,这里通过host区分网站目录和路由转发
-    root /var/www/html/g.ailm.site;  # 定义该server的站点目录,root是 root配置的路径+uri = 实际访问你服务器的文件的地址,若不对应可以使用alias
+    server_name hello.ailm.site; # 定义该server的host,我这是所有3级域名都请求到家里的nginx,这里通过host区分网站目录和路由转发
+    root /var/www/html/hello.ailm.site;  # 定义该server的站点目录,root是 root配置的路径+uri = 实际访问你服务器的文件的地址,若不对应可以使用alias
     index index.html; # 访问根目录返回的默认文件
     ssl_verify_client on; # 客户端证书验证 on为强制验证客户端证书
     ssl_client_certificate /etc/nginx/certs/cloudflare.pem; # 客户端证书的CA证书,只有通过该证书签发的证书才能通过验证,而私钥在CF手上,只有CF能访问
@@ -350,7 +350,7 @@ server { # 配置一个server
 
 > proxy_pass的host后面加/的话会将路径中的location段去掉,这里9001端口是我的后端服务
 > 
-> 访问g.ailm.site/api/a 会反向代理到 http://127.0.0.1:9001/a ,其他路径在root中寻找,找不到返回404
+> 访问hello.ailm.site/api/a 会反向代理到 http://127.0.0.1:9001/a ,其他路径在root中寻找,找不到返回404
 > 
 > 你也可以通过uri区分路由共用主机名
 > 
@@ -362,9 +362,9 @@ server { # 配置一个server
 > proxy_pass http://127.0.0.1:9002/; 
 > }
 >> ```
-> 访问g.ailm.site/serviceA/a相当于访问http://127.0.0.1:9001/a
+> 访问hello.ailm.site/serviceA/a相当于访问http://127.0.0.1:9001/a
 > 
-> 访问g.ailm.site/serviceB/a相当于访问http://127.0.0.1:9002/a
+> 访问hello.ailm.site/serviceB/a相当于访问http://127.0.0.1:9002/a
 
 ##### 通过nginx暴露服务器的其他服务 ,已经存在的DDNSGO后台管理,我的NginxUI,其他的服务项目例如私有云盘nextcloud,存储聚合AList,影音服务Jellyfin...
 
